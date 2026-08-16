@@ -4366,7 +4366,7 @@
             if (!urlHost && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:')) {
                 baseHost = 'http://127.0.0.1:8080';
             } else {
-                const rawHost = urlHost || 'https://syncc-0g54.onrender.com';
+                const rawHost = urlHost || 'https://061cdf9d-800d-4dc7-9bba-99261a8ca7dc-00-ejaubrrfuint.kirk.replit.dev';
                 const cleanedHost = rawHost.replace(/^https?:\/\//i, '').replace(/\/+$/, '');
                 baseHost = `https://${cleanedHost}`;
             }
@@ -4400,7 +4400,7 @@
                     wsUrl = `ws://127.0.0.1:8080/?key=${key}`;
                 } else {
                     // Use host query parameter if present, otherwise default to Render server URL
-                    const rawHost = urlHost || 'https://syncc-0g54.onrender.com';
+                    const rawHost = urlHost || 'https://061cdf9d-800d-4dc7-9bba-99261a8ca7dc-00-ejaubrrfuint.kirk.replit.dev';
                     const cloudHost = rawHost.replace(/^https?:\/\//i, '').replace(/\/+$/, '');
                     wsUrl = `wss://${cloudHost}/?key=${key}`;
                 }
