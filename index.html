@@ -54,6 +54,86 @@
 
         /* Grain - removed */
 
+        /* ── Animated Background with Floating Blobs ── */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 50% 50%, rgba(50, 0, 12, 0.6) 0%, transparent 50%),
+                radial-gradient(circle at 20% 30%, rgba(50, 0, 12, 0.5) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(50, 0, 12, 0.45) 0%, transparent 45%),
+                radial-gradient(circle at 30% 80%, rgba(50, 0, 12, 0.4) 0%, transparent 35%),
+                radial-gradient(circle at 70% 20%, rgba(50, 0, 12, 0.55) 0%, transparent 40%);
+            animation: gradientMove 15s ease-in-out infinite alternate;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle at 30% 30%, rgba(50, 0, 12, 0.3) 0%, transparent 25%),
+                radial-gradient(circle at 70% 60%, rgba(50, 0, 12, 0.25) 0%, transparent 30%),
+                radial-gradient(circle at 40% 80%, rgba(50, 0, 12, 0.2) 0%, transparent 28%);
+            animation: blobFloat 25s ease-in-out infinite;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        @keyframes gradientMove {
+            0% {
+                background: 
+                    radial-gradient(circle at 50% 50%, rgba(50, 0, 12, 0.6) 0%, transparent 50%),
+                    radial-gradient(circle at 20% 30%, rgba(50, 0, 12, 0.5) 0%, transparent 40%),
+                    radial-gradient(circle at 80% 70%, rgba(50, 0, 12, 0.45) 0%, transparent 45%),
+                    radial-gradient(circle at 30% 80%, rgba(50, 0, 12, 0.4) 0%, transparent 35%),
+                    radial-gradient(circle at 70% 20%, rgba(50, 0, 12, 0.55) 0%, transparent 40%);
+            }
+            50% {
+                background: 
+                    radial-gradient(circle at 40% 40%, rgba(50, 0, 12, 0.7) 0%, transparent 50%),
+                    radial-gradient(circle at 60% 30%, rgba(50, 0, 12, 0.55) 0%, transparent 40%),
+                    radial-gradient(circle at 30% 70%, rgba(50, 0, 12, 0.5) 0%, transparent 45%),
+                    radial-gradient(circle at 70% 80%, rgba(50, 0, 12, 0.45) 0%, transparent 35%),
+                    radial-gradient(circle at 50% 20%, rgba(50, 0, 12, 0.6) 0%, transparent 40%);
+            }
+            100% {
+                background: 
+                    radial-gradient(circle at 30% 60%, rgba(50, 0, 12, 0.8) 0%, transparent 50%),
+                    radial-gradient(circle at 70% 40%, rgba(50, 0, 12, 0.6) 0%, transparent 40%),
+                    radial-gradient(circle at 40% 90%, rgba(50, 0, 12, 0.55) 0%, transparent 45%),
+                    radial-gradient(circle at 60% 10%, rgba(50, 0, 12, 0.5) 0%, transparent 35%),
+                    radial-gradient(circle at 80% 50%, rgba(50, 0, 12, 0.65) 0%, transparent 40%);
+            }
+        }
+
+        @keyframes blobFloat {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            25% {
+                transform: translate(2%, 2%) rotate(90deg);
+            }
+            50% {
+                transform: translate(0, 4%) rotate(180deg);
+            }
+            75% {
+                transform: translate(-2%, 2%) rotate(270deg);
+            }
+            100% {
+                transform: translate(0, 0) rotate(360deg);
+            }
+        }
+
         /* ── Top Navigation Bar ── */
         .sidebar {
             width: 100%;
@@ -298,11 +378,16 @@
 
         /* ── Tab pages ── */
         .tab-page {
-            display: none
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.3s ease-out, transform 0.3s ease-out;
         }
 
         .tab-page.active {
-            display: block
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* ── Config System ── */
@@ -3569,14 +3654,38 @@
     <script>
         // ── Tab switching ──
         function switchTab(id, navEl) {
-            document.querySelectorAll('.tab-page').forEach(p => p.classList.remove('active'));
+            // Get current active tab
+            const currentActiveTab = document.querySelector('.tab-page.active');
+            
+            // Remove active class from current tab with animation
+            if (currentActiveTab) {
+                currentActiveTab.style.opacity = '0';
+                currentActiveTab.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    currentActiveTab.classList.remove('active');
+                    currentActiveTab.style.opacity = '';
+                    currentActiveTab.style.transform = '';
+                }, 300);
+            }
+            
+            // Remove active class from nav items
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
             document.querySelectorAll('.dropdown-item').forEach(n => n.classList.remove('active'));
-            document.getElementById('tab-' + id).classList.add('active');
-            if (navEl) navEl.classList.add('active');
-                
+            
             // Close all dropdowns
             document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('active'));
+            
+            // Activate new tab with delay for smooth transition
+            setTimeout(() => {
+                const newTab = document.getElementById('tab-' + id);
+                if (newTab) {
+                    newTab.classList.add('active');
+                    // Trigger reflow to ensure animation plays
+                    void newTab.offsetWidth;
+                }
+                if (navEl) navEl.classList.add('active');
+            }, currentActiveTab ? 300 : 0);
         }
 
         // ── Dropdown toggle ──
