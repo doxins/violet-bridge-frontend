@@ -4460,7 +4460,12 @@
         }
 
         function syncToRoblox() {
-            if (!ws || ws.readyState !== WebSocket.OPEN) return;
+            console.log('syncToRoblox called, ws state:', ws ? ws.readyState : 'no ws');
+            
+            if (!ws || ws.readyState !== WebSocket.OPEN) {
+                console.log('WebSocket not connected, skipping sync');
+                return;
+            }
             
             const getVal = (id) => {
                 const el = document.querySelector('#' + id + ' .cs-value');
@@ -4728,8 +4733,11 @@
                 data: settings
             });
 
+            console.log('Sending payload:', payload);
+
             if (ws && ws.readyState === WebSocket.OPEN) {
                 ws.send(payload);
+                console.log('Payload sent successfully');
             } else {
                 const urlParams = new URLSearchParams(window.location.search);
                 const key = (urlParams.get('key') || 'default').trim();
