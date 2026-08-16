@@ -1,0 +1,8 @@
+{
+  "name": "violet-bridge-frontend",
+  "version": "1.0.0",
+  "description": "Frontend for Violet Roblox script",
+  "scripts": {
+    "dev": "vercel dev"
+  }
+}
