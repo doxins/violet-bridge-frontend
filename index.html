@@ -3130,49 +3130,173 @@
                                     <div class="toggle-thumb"></div>
                                 </label>
                             </div>
-                            <div class="row" id="dmg-override-mode-row" style="display:none;">
-                                <span class="row-label">Mode</span>
-                                <div class="custom-select" id="dmgOverrideModeSelect">
-                                    <div class="cs-trigger" onclick="toggleSelect('dmgOverrideModeSelect',event)">
-                                        <div class="cs-value-wrap">
-                                            <div class="cs-badge"></div><span class="cs-value">Full</span>
+                            <div id="dmg-override-content" style="display:none;">
+                                <div class="row">
+                                    <span class="row-label">Glock</span>
+                                    <div class="custom-select" id="dmg-glock">
+                                        <div class="cs-trigger" onclick="toggleSelect('dmg-glock',event)">
+                                            <div class="cs-value-wrap">
+                                                <div class="cs-badge"></div><span class="cs-value">Disabled</span>
+                                            </div>
+                                            <div class="cs-right">
+                                                <div class="cs-divider-v"></div>
+                                                <svg class="cs-arrow" viewBox="0 0 14 14" fill="none">
+                                                    <path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+                                                </svg>
+                                            </div>
                                         </div>
-                                        <div class="cs-right">
-                                            <div class="cs-divider-v"></div>
-                                            <svg class="cs-arrow" viewBox="0 0 14 14" fill="none">
-                                                <path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
+                                        <div class="cs-dropdown" id="dmg-glock-dd">
+                                            <div class="cs-option selected" onclick="selectOption('dmg-glock','Disabled',this)">Disabled<svg class="cs-check" viewBox="0 0 13 13" fill="none"><path d="M2 6.5l3.5 3.5L11 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                            <div class="cs-option" onclick="selectOption('dmg-glock','Full',this)">Full<svg class="cs-check" viewBox="0 0 13 13" fill="none"><path d="M2 6.5l3.5 3.5L11 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                            <div class="cs-option" onclick="selectOption('dmg-glock','Half',this)">Half<svg class="cs-check" viewBox="0 0 13 13" fill="none"><path d="M2 6.5l3.5 3.5L11 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                                         </div>
-                                    </div>
-                                    <div class="cs-dropdown" id="dmgOverrideModeSelect-dd">
-                                        <div class="cs-option selected" onclick="selectOption('dmgOverrideModeSelect','Full',this)">Full<svg class="cs-check" viewBox="0 0 13 13" fill="none"><path d="M2 6.5l3.5 3.5L11 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-                                        <div class="cs-option" onclick="selectOption('dmgOverrideModeSelect','Half',this)">Half<svg class="cs-check" viewBox="0 0 13 13" fill="none"><path d="M2 6.5l3.5 3.5L11 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row" id="dmg-override-weapons-row" style="display:none;">
-                                <span class="row-label">Weapons</span>
-                                <div class="custom-select" id="dmgOverrideWeaponsSelect">
-                                    <div class="cs-trigger" onclick="toggleSelect('dmgOverrideWeaponsSelect',event)">
-                                        <div class="cs-value-wrap">
-                                            <div class="cs-badge"></div><span class="cs-value" id="dmgOverrideWeaponsSelect-val">All Weapons</span>
+                                <div class="row">
+                                    <span class="row-label">Double Barrel SG</span>
+                                    <div class="custom-select" id="dmg-dbs">
+                                        <div class="cs-trigger" onclick="toggleSelect('dmg-dbs',event)">
+                                            <div class="cs-value-wrap">
+                                                <div class="cs-badge"></div><span class="cs-value">Disabled</span>
+                                            </div>
+                                            <div class="cs-right">
+                                                <div class="cs-divider-v"></div>
+                                                <svg class="cs-arrow" viewBox="0 0 14 14" fill="none">
+                                                    <path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+                                                </svg>
+                                            </div>
                                         </div>
-                                        <div class="cs-right">
-                                            <div class="cs-divider-v"></div>
-                                            <svg class="cs-arrow" viewBox="0 0 14 14" fill="none">
-                                                <path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
+                                        <div class="cs-dropdown" id="dmg-dbs-dd">
+                                            <div class="cs-option selected" onclick="selectOption('dmg-dbs','Disabled',this)">Disabled<svg class="cs-check" viewBox="0 0 13 13" fill="none"><path d="M2 6.5l3.5 3.5L11 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                            <div class="cs-option" onclick="selectOption('dmg-dbs','Full',this)">Full<svg class="cs-check" viewBox="0 0 13 13" fill="none"><path d="M2 6.5l3.5 3.5L11 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                            <div class="cs-option" onclick="selectOption('dmg-dbs','Half',this)">Half<svg class="cs-check" viewBox="0 0 13 13" fill="none"><path d="M2 6.5l3.5 3.5L11 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                                         </div>
                                     </div>
-                                    <div class="cs-dropdown" id="dmgOverrideWeaponsSelect-dd" onclick="event.stopPropagation()">
-                                        <div class="cs-option" onclick="toggleMultiOption('dmgOverrideWeaponsSelect', this, 'glock')">Glock<svg class="cs-check" viewBox="0 0 13 13" fill="none"><path d="M2 6.5l3.5 3.5L11 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg><input type="checkbox" value="glock"></div>
-                                        <div class="cs-option" onclick="toggleMultiOption('dmgOverrideWeaponsSelect', this, 'double barrel shotgun')">Double Barrel Shotgun<svg class="cs-check" viewBox="0 0 13 13" fill="none"><path d="M2 6.5l3.5 3.5L11 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg><input type="checkbox" value="double barrel shotgun"></div>
-                                        <div class="cs-option" onclick="toggleMultiOption('dmgOverrideWeaponsSelect', this, 'silencer')">Silencer<svg class="cs-check" viewBox="0 0 13 13" fill="none"><path d="M2 6.5l3.5 3.5L11 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg><input type="checkbox" value="silencer"></div>
-                                        <div class="cs-option" onclick="toggleMultiOption('dmgOverrideWeaponsSelect', this, 'revolver')">Revolver<svg class="cs-check" viewBox="0 0 13 13" fill="none"><path d="M2 6.5l3.5 3.5L11 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg><input type="checkbox" value="revolver"></div>
-                                        <div class="cs-option" onclick="toggleMultiOption('dmgOverrideWeaponsSelect', this, 'rifle')">Rifle<svg class="cs-check" viewBox="0 0 13 13" fill="none"><path d="M2 6.5l3.5 3.5L11 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg><input type="checkbox" value="rifle"></div>
-                                        <div class="cs-option" onclick="toggleMultiOption('dmgOverrideWeaponsSelect', this, 'tactical shotgun')">Tactical Shotgun<svg class="cs-check" viewBox="0 0 13 13" fill="none"><path d="M2 6.5l3.5 3.5L11 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg><input type="checkbox" value="tactical shotgun"></div>
-                                        <div class="cs-option" onclick="toggleMultiOption('dmgOverrideWeaponsSelect', this, 'deagle')">Deagle<svg class="cs-check" viewBox="0 0 13 13" fill="none"><path d="M2 6.5l3.5 3.5L11 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg><input type="checkbox" value="deagle"></div>
-                                        <div class="cs-option" onclick="toggleMultiOption('dmgOverrideWeaponsSelect', this, 'shotgun')">Shotgun<svg class="cs-check" viewBox="0 0 13 13" fill="none"><path d="M2 6.5l3.5 3.5L11 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg><input type="checkbox" value="shotgun"></div>
+                                </div>
+                                <div class="row">
+                                    <span class="row-label">Silencer</span>
+                                    <div class="custom-select" id="dmg-silencer">
+                                        <div class="cs-trigger" onclick="toggleSelect('dmg-silencer',event)">
+                                            <div class="cs-value-wrap">
+                                                <div class="cs-badge"></div><span class="cs-value">Disabled</span>
+                                            </div>
+                                            <div class="cs-right">
+                                                <div class="cs-divider-v"></div>
+                                                <svg class="cs-arrow" viewBox="0 0 14 14" fill="none">
+                                                    <path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="cs-dropdown" id="dmg-silencer-dd">
+                                            <div class="cs-option selected" onclick="selectOption('dmg-silencer','Disabled',this)">Disabled<svg class="cs-check" viewBox="0 0 13 13" fill="none"><path d="M2 6.5l3.5 3.5L11 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                            <div class="cs-option" onclick="selectOption('dmg-silencer','Full',this)">Full<svg class="cs-check" viewBox="0 0 13 13" fill="none"><path d="M2 6.5l3.5 3.5L11 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                            <div class="cs-option" onclick="selectOption('dmg-silencer','Half',this)">Half<svg class="cs-check" viewBox="0 0 13 13" fill="none"><path d="M2 6.5l3.5 3.5L11 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <span class="row-label">Revolver</span>
+                                    <div class="custom-select" id="dmg-revolver">
+                                        <div class="cs-trigger" onclick="toggleSelect('dmg-revolver',event)">
+                                            <div class="cs-value-wrap">
+                                                <div class="cs-badge"></div><span class="cs-value">Disabled</span>
+                                            </div>
+                                            <div class="cs-right">
+                                                <div class="cs-divider-v"></div>
+                                                <svg class="cs-arrow" viewBox="0 0 14 14" fill="none">
+                                                    <path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="cs-dropdown" id="dmg-revolver-dd">
+                                            <div class="cs-option selected" onclick="selectOption('dmg-revolver','Disabled',this)">Disabled<svg class="cs-check" viewBox="0 0 13 13" fill="none"><path d="M2 6.5l3.5 3.5L11 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                            <div class="cs-option" onclick="selectOption('dmg-revolver','Full',this)">Full<svg class="cs-check" viewBox="0 0 13 13" fill="none"><path d="M2 6.5l3.5 3.5L11 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                            <div class="cs-option" onclick="selectOption('dmg-revolver','Half',this)">Half<svg class="cs-check" viewBox="0 0 13 13" fill="none"><path d="M2 6.5l3.5 3.5L11 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <span class="row-label">Rifle</span>
+                                    <div class="custom-select" id="dmg-rifle">
+                                        <div class="cs-trigger" onclick="toggleSelect('dmg-rifle',event)">
+                                            <div class="cs-value-wrap">
+                                                <div class="cs-badge"></div><span class="cs-value">Disabled</span>
+                                            </div>
+                                            <div class="cs-right">
+                                                <div class="cs-divider-v"></div>
+                                                <svg class="cs-arrow" viewBox="0 0 14 14" fill="none">
+                                                    <path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="cs-dropdown" id="dmg-rifle-dd">
+                                            <div class="cs-option selected" onclick="selectOption('dmg-rifle','Disabled',this)">Disabled<svg class="cs-check" viewBox="0 0 13 13" fill="none"><path d="M2 6.5l3.5 3.5L11 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                            <div class="cs-option" onclick="selectOption('dmg-rifle','Full',this)">Full<svg class="cs-check" viewBox="0 0 13 13" fill="none"><path d="M2 6.5l3.5 3.5L11 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                            <div class="cs-option" onclick="selectOption('dmg-rifle','Half',this)">Half<svg class="cs-check" viewBox="0 0 13 13" fill="none"><path d="M2 6.5l3.5 3.5L11 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <span class="row-label">Tactical Shotgun</span>
+                                    <div class="custom-select" id="dmg-tsg">
+                                        <div class="cs-trigger" onclick="toggleSelect('dmg-tsg',event)">
+                                            <div class="cs-value-wrap">
+                                                <div class="cs-badge"></div><span class="cs-value">Disabled</span>
+                                            </div>
+                                            <div class="cs-right">
+                                                <div class="cs-divider-v"></div>
+                                                <svg class="cs-arrow" viewBox="0 0 14 14" fill="none">
+                                                    <path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="cs-dropdown" id="dmg-tsg-dd">
+                                            <div class="cs-option selected" onclick="selectOption('dmg-tsg','Disabled',this)">Disabled<svg class="cs-check" viewBox="0 0 13 13" fill="none"><path d="M2 6.5l3.5 3.5L11 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                            <div class="cs-option" onclick="selectOption('dmg-tsg','Full',this)">Full<svg class="cs-check" viewBox="0 0 13 13" fill="none"><path d="M2 6.5l3.5 3.5L11 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                            <div class="cs-option" onclick="selectOption('dmg-tsg','Half',this)">Half<svg class="cs-check" viewBox="0 0 13 13" fill="none"><path d="M2 6.5l3.5 3.5L11 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <span class="row-label">Deagle</span>
+                                    <div class="custom-select" id="dmg-deagle">
+                                        <div class="cs-trigger" onclick="toggleSelect('dmg-deagle',event)">
+                                            <div class="cs-value-wrap">
+                                                <div class="cs-badge"></div><span class="cs-value">Disabled</span>
+                                            </div>
+                                            <div class="cs-right">
+                                                <div class="cs-divider-v"></div>
+                                                <svg class="cs-arrow" viewBox="0 0 14 14" fill="none">
+                                                    <path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="cs-dropdown" id="dmg-deagle-dd">
+                                            <div class="cs-option selected" onclick="selectOption('dmg-deagle','Disabled',this)">Disabled<svg class="cs-check" viewBox="0 0 13 13" fill="none"><path d="M2 6.5l3.5 3.5L11 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                            <div class="cs-option" onclick="selectOption('dmg-deagle','Full',this)">Full<svg class="cs-check" viewBox="0 0 13 13" fill="none"><path d="M2 6.5l3.5 3.5L11 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                            <div class="cs-option" onclick="selectOption('dmg-deagle','Half',this)">Half<svg class="cs-check" viewBox="0 0 13 13" fill="none"><path d="M2 6.5l3.5 3.5L11 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <span class="row-label">Shotgun</span>
+                                    <div class="custom-select" id="dmg-shotgun">
+                                        <div class="cs-trigger" onclick="toggleSelect('dmg-shotgun',event)">
+                                            <div class="cs-value-wrap">
+                                                <div class="cs-badge"></div><span class="cs-value">Disabled</span>
+                                            </div>
+                                            <div class="cs-right">
+                                                <div class="cs-divider-v"></div>
+                                                <svg class="cs-arrow" viewBox="0 0 14 14" fill="none">
+                                                    <path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="cs-dropdown" id="dmg-shotgun-dd">
+                                            <div class="cs-option selected" onclick="selectOption('dmg-shotgun','Disabled',this)">Disabled<svg class="cs-check" viewBox="0 0 13 13" fill="none"><path d="M2 6.5l3.5 3.5L11 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                            <div class="cs-option" onclick="selectOption('dmg-shotgun','Full',this)">Full<svg class="cs-check" viewBox="0 0 13 13" fill="none"><path d="M2 6.5l3.5 3.5L11 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                            <div class="cs-option" onclick="selectOption('dmg-shotgun','Half',this)">Half<svg class="cs-check" viewBox="0 0 13 13" fill="none"><path d="M2 6.5l3.5 3.5L11 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -4061,10 +4185,8 @@
 
         // ── Damage Override rows toggle ──
         function toggleDamageOverrideMode(enabled) {
-            const modeRow = document.getElementById('dmg-override-mode-row');
-            const weaponsRow = document.getElementById('dmg-override-weapons-row');
-            if (modeRow) modeRow.style.display = enabled ? 'flex' : 'none';
-            if (weaponsRow) weaponsRow.style.display = enabled ? 'flex' : 'none';
+            const content = document.getElementById('dmg-override-content');
+            if (content) content.style.display = enabled ? 'block' : 'none';
         }
 
         // ── Settings Popover ──
@@ -4904,8 +5026,16 @@
                 },
                 damageOverride: {
                     enabled: getToggleById('dmg-override-toggle'),
-                    mode: getVal('dmgOverrideModeSelect'),
-                    weapons: getMultiVal('dmgOverrideWeaponsSelect')
+                    weapons: {
+                        glock: getVal('dmg-glock'),
+                        dbs: getVal('dmg-dbs'),
+                        silencer: getVal('dmg-silencer'),
+                        revolver: getVal('dmg-revolver'),
+                        rifle: getVal('dmg-rifle'),
+                        tsg: getVal('dmg-tsg'),
+                        deagle: getVal('dmg-deagle'),
+                        shotgun: getVal('dmg-shotgun')
+                    }
                 },
                 movement: {
                     enabled: getToggleById('movement-toggle'),
