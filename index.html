@@ -3150,6 +3150,32 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row" id="dmg-override-weapons-row" style="display:none;">
+                                <span class="row-label">Weapons</span>
+                                <div class="custom-select" id="dmgOverrideWeaponsSelect">
+                                    <div class="cs-trigger" onclick="toggleSelect('dmgOverrideWeaponsSelect',event)">
+                                        <div class="cs-value-wrap">
+                                            <div class="cs-badge"></div><span class="cs-value" id="dmgOverrideWeaponsSelect-val">All Weapons</span>
+                                        </div>
+                                        <div class="cs-right">
+                                            <div class="cs-divider-v"></div>
+                                            <svg class="cs-arrow" viewBox="0 0 14 14" fill="none">
+                                                <path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div class="cs-dropdown" id="dmgOverrideWeaponsSelect-dd" onclick="event.stopPropagation()">
+                                        <div class="cs-option" onclick="toggleMultiOption('dmgOverrideWeaponsSelect', this, 'glock')">Glock<svg class="cs-check" viewBox="0 0 13 13" fill="none"><path d="M2 6.5l3.5 3.5L11 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg><input type="checkbox" value="glock"></div>
+                                        <div class="cs-option" onclick="toggleMultiOption('dmgOverrideWeaponsSelect', this, 'double barrel shotgun')">Double Barrel Shotgun<svg class="cs-check" viewBox="0 0 13 13" fill="none"><path d="M2 6.5l3.5 3.5L11 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg><input type="checkbox" value="double barrel shotgun"></div>
+                                        <div class="cs-option" onclick="toggleMultiOption('dmgOverrideWeaponsSelect', this, 'silencer')">Silencer<svg class="cs-check" viewBox="0 0 13 13" fill="none"><path d="M2 6.5l3.5 3.5L11 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg><input type="checkbox" value="silencer"></div>
+                                        <div class="cs-option" onclick="toggleMultiOption('dmgOverrideWeaponsSelect', this, 'revolver')">Revolver<svg class="cs-check" viewBox="0 0 13 13" fill="none"><path d="M2 6.5l3.5 3.5L11 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg><input type="checkbox" value="revolver"></div>
+                                        <div class="cs-option" onclick="toggleMultiOption('dmgOverrideWeaponsSelect', this, 'rifle')">Rifle<svg class="cs-check" viewBox="0 0 13 13" fill="none"><path d="M2 6.5l3.5 3.5L11 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg><input type="checkbox" value="rifle"></div>
+                                        <div class="cs-option" onclick="toggleMultiOption('dmgOverrideWeaponsSelect', this, 'tactical shotgun')">Tactical Shotgun<svg class="cs-check" viewBox="0 0 13 13" fill="none"><path d="M2 6.5l3.5 3.5L11 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg><input type="checkbox" value="tactical shotgun"></div>
+                                        <div class="cs-option" onclick="toggleMultiOption('dmgOverrideWeaponsSelect', this, 'deagle')">Deagle<svg class="cs-check" viewBox="0 0 13 13" fill="none"><path d="M2 6.5l3.5 3.5L11 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg><input type="checkbox" value="deagle"></div>
+                                        <div class="cs-option" onclick="toggleMultiOption('dmgOverrideWeaponsSelect', this, 'shotgun')">Shotgun<svg class="cs-check" viewBox="0 0 13 13" fill="none"><path d="M2 6.5l3.5 3.5L11 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg><input type="checkbox" value="shotgun"></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -4033,6 +4059,14 @@
             });
         }
 
+        // ── Damage Override rows toggle ──
+        function toggleDamageOverrideMode(enabled) {
+            const modeRow = document.getElementById('dmg-override-mode-row');
+            const weaponsRow = document.getElementById('dmg-override-weapons-row');
+            if (modeRow) modeRow.style.display = enabled ? 'flex' : 'none';
+            if (weaponsRow) weaponsRow.style.display = enabled ? 'flex' : 'none';
+        }
+
         // ── Settings Popover ──
         function toggleSettings(icon, e) {
             if (e) e.stopPropagation();
@@ -4870,7 +4904,8 @@
                 },
                 damageOverride: {
                     enabled: getToggleById('dmg-override-toggle'),
-                    mode: getVal('dmgOverrideModeSelect')
+                    mode: getVal('dmgOverrideModeSelect'),
+                    weapons: getMultiVal('dmgOverrideWeaponsSelect')
                 },
                 movement: {
                     enabled: getToggleById('movement-toggle'),
