@@ -5273,9 +5273,16 @@
         function applyAllSettings(snapshot) {
             if (!snapshot || typeof snapshot !== 'object') return;
 
+            // Only apply settings to elements in the currently active tab to prevent cross-tab contamination
+            const activeTab = document.querySelector('.tab-page.active');
+            const activeTabId = activeTab ? activeTab.id : null;
+
             // 1. Restore Checkboxes
             document.querySelectorAll('input[type="checkbox"]').forEach(el => {
                 if (el.closest('#tab-configs')) return;
+                // Only restore if element is in the active tab or if no tab is active
+                const elTab = el.closest('.tab-page');
+                if (activeTabId && elTab && elTab.id !== activeTabId) return;
                 const key = getElementSelectorKey(el);
                 if (snapshot[key] !== undefined) {
                     const val = snapshot[key];
@@ -5294,6 +5301,9 @@
             });
 
             document.querySelectorAll('input[type="range"]').forEach(el => {
+                // Only restore if element is in the active tab or if no tab is active
+                const elTab = el.closest('.tab-page');
+                if (activeTabId && elTab && elTab.id !== activeTabId) return;
                 const key = getElementSelectorKey(el);
                 const textEl = restoreSliderTextMap[el.id];
                 // Prefer the text-input key value (saved with full decimals), fall back to range key
@@ -5328,6 +5338,9 @@
 
             // 2b. Also restore any editable-val whose slider may not have fired (belt+braces)
             document.querySelectorAll('input.slider-val.editable-val').forEach(el => {
+                // Only restore if element is in the active tab or if no tab is active
+                const elTab = el.closest('.tab-page');
+                if (activeTabId && elTab && elTab.id !== activeTabId) return;
                 const key = getElementSelectorKey(el);
                 if (snapshot[key] === undefined) return;
                 const num = parseFloat(snapshot[key]);
@@ -5349,6 +5362,9 @@
             document.querySelectorAll('.custom-select').forEach(el => {
                 if (el.closest('#tab-configs')) return;
                 if (el.id === 'sc-add' || el.id === 'dm-add') return;
+                // Only restore if element is in the active tab or if no tab is active
+                const elTab = el.closest('.tab-page');
+                if (activeTabId && elTab && elTab.id !== activeTabId) return;
                 const key = getElementSelectorKey(el);
                 if (snapshot[key] !== undefined) {
                     const optionVal = snapshot[key].toString().toLowerCase().trim().replace(/\s+/g, ' ');
@@ -5384,6 +5400,9 @@
             // 4. Restore Keybinds (MutationObserver handles syncToRoblox automatically)
             document.querySelectorAll('.keybind, [id^="keybind"]').forEach(el => {
                 if (el.tagName !== 'INPUT' && !el.closest('#tab-configs')) {
+                    // Only restore if element is in the active tab or if no tab is active
+                    const elTab = el.closest('.tab-page');
+                    if (activeTabId && elTab && elTab.id !== activeTabId) return;
                     const key = getElementSelectorKey(el);
                     if (snapshot[key] !== undefined) {
                         el.textContent = snapshot[key];
@@ -5393,6 +5412,9 @@
 
             // 5. Restore Color Pickers (MutationObserver handles syncToRoblox automatically)
             document.querySelectorAll('.color-picker-btn').forEach(btn => {
+                // Only restore if element is in the active tab or if no tab is active
+                const elTab = btn.closest('.tab-page');
+                if (activeTabId && elTab && elTab.id !== activeTabId) return;
                 const key = getElementSelectorKey(btn);
                 if (snapshot[key] !== undefined) {
                     const data = snapshot[key];
@@ -5404,6 +5426,9 @@
 
             // 6. Restore Multi-select dropdowns (programmatic clicks ensure scToggle runs correctly)
             document.querySelectorAll('.multi-dropdown').forEach(el => {
+                // Only restore if element is in the active tab or if no tab is active
+                const elTab = el.closest('.tab-page');
+                if (activeTabId && elTab && elTab.id !== activeTabId) return;
                 const key = getElementSelectorKey(el);
                 if (snapshot[key] !== undefined) {
                     const selectedList = snapshot[key];
