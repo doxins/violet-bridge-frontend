@@ -159,9 +159,9 @@
         .logo img {
             width: 45px;
             height: 45px;
-            object-fit: cover;
+            object-fit: contain;
             object-position: center;
-            border-radius: 8px;
+            border-radius: 0;
             display: block;
             margin: 0;
             transform: translate(4px, -2px);
@@ -1370,7 +1370,7 @@
         <!-- ══════════ TOP NAVIGATION ══════════ -->
         <aside class="sidebar">
             <div class="logo">
-                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDUiIGhlaWdodD0iNDUiIHZpZXdCb3g9IjAgMCA0NSA0NSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjIuNSIgY3k9IjIyLjUiIHI9IjIyLjUiIGZpbGw9IiM5YTAwM2MiLz4KPC9zdmc+" alt="VIOLET Logo">
+                <img src="violet.png" alt="VIOLET Logo">
                 <span class="logo-text">VIOLET</span>
             </div>
 
@@ -4543,6 +4543,34 @@
         // LIVE SYNC BRIDGE
         // ══════════════════════════════════════
         let ws = null;
+        let httpFallbackActive = false;
+        
+        function pollSettingsHttp() {
+            if (ws && ws.readyState === WebSocket.OPEN) return;
+            
+            const urlParams = new URLSearchParams(window.location.search);
+            const key = (urlParams.get('key') || 'default').trim();
+            const urlHost = urlParams.get('host');
+            
+            let baseHost;
+            if (!urlHost && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:')) {
+                baseHost = 'http://127.0.0.1:8080';
+            } else {
+                const rawHost = urlHost || 'https://061cdf9d-800d-4dc7-9bba-99261a8ca7dc-00-ejaubrrfuint.kirk.replit.dev';
+                const cleanedHost = rawHost.replace(/^https?:\/\//i, '').replace(/\/+$/, '');
+                baseHost = `https://${cleanedHost}`;
+            }
+
+            fetch(`${baseHost}/settings?key=${key}`)
+                .then(r => r.json())
+                .then(data => {
+                    const settings = data && data.settings !== undefined ? data.settings : data;
+                    if (settings) {
+                        // Apply settings state locally if needed
+                    }
+                })
+                .catch(() => {});
+        }
         
         function connectWebSocket() {
             const statusDot = document.querySelector('.status-dot');
@@ -4572,6 +4600,17 @@
                     statusDot.style.animation = 'blink 2.4s ease-in-out infinite';
                     statusText.textContent = 'Connected';
                     syncToRoblox();
+                    
+                    if (window.wsHeartbeat) clearInterval(window.wsHeartbeat);
+                    window.wsHeartbeat = setInterval(() => {
+                        if (ws.readyState === WebSocket.OPEN) {
+                            ws.send(JSON.stringify({ type: 'PING' }));
+                        }
+                    }, 15000);
+                    if (window.httpPollInterval) {
+                        clearInterval(window.httpPollInterval);
+                        window.httpPollInterval = null;
+                    }
                 };
 
                 ws.onmessage = (msg) => {
@@ -4587,16 +4626,23 @@
                     statusDot.style.background = '#ff4757';
                     statusDot.style.boxShadow = '0 0 6px #ff4757';
                     statusDot.style.animation = 'none';
-                    statusText.textContent = 'Offline';
+                    statusText.textContent = 'Offline (HTTP Fallback)';
                     if (window.wsHeartbeat) clearInterval(window.wsHeartbeat);
-                    setTimeout(connectWebSocket, 3000);
+                    
+                    if (!window.httpPollInterval) {
+                        window.httpPollInterval = setInterval(pollSettingsHttp, 1000);
+                    }
+                    setTimeout(connectWebSocket, 1500);
                 };
 
                 ws.onerror = () => {
-                    statusText.textContent = 'Server Error';
+                    statusText.textContent = 'Server Error (HTTP Fallback)';
                 };
             } catch (e) {
-                setTimeout(connectWebSocket, 3000);
+                if (!window.httpPollInterval) {
+                    window.httpPollInterval = setInterval(pollSettingsHttp, 1000);
+                }
+                setTimeout(connectWebSocket, 1500);
             }
         }
 
